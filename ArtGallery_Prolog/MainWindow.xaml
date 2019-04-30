@@ -1,0 +1,122 @@
+﻿<Window x:Class="ArtGallery_Prolog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArtGallery_Prolog"
+        mc:Ignorable="d"
+        Title="ArtGallery" Background="{ StaticResource BackgroundColor }">
+    <StackPanel>
+        
+        <!-- Index Panel -->
+        <StackPanel x:Name="index" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Image Style="{ StaticResource ImageIndex }" />
+            <Button x:Name="enterButton" Style="{ StaticResource ButtonStyle }" Content="Enter Site" Margin="10" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center" Click="enterButton_Click"/>
+            <TextBlock x:Name="indexErrorMessage" Style="{ StaticResource ErrorStyle}"/>
+        </StackPanel>
+        
+        <!-- Main Panel -->
+        <StackPanel x:Name="mainPanel">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="50, 50, 0, 0">
+                
+                <!-- Artist ComboBox -->
+                <TextBlock Style="{ StaticResource LabelStyle}" Text="Artist "  />
+                <ComboBox Style="{ StaticResource ComboBoxStyle }" Name="artistComboBox" />
+
+                <!-- Museum ComboBox -->
+                <TextBlock Style="{ StaticResource LabelStyle}" Text="Museum" />
+                <ComboBox Style="{ StaticResource ComboBoxStyle }" Name="museumComboBox" />
+
+                <!-- Technique ComboBox -->
+                <TextBlock Style="{ StaticResource LabelStyle}" Text="Technique" />
+                <ComboBox Style="{ StaticResource ComboBoxStyle }" Name="techniqueComboBox" />
+
+                <!-- Time ComboBox -->
+                <TextBlock Style="{ StaticResource LabelStyle}" Text="Year" />
+                <ComboBox Style="{ StaticResource ComboBoxStyle }" Name="timeComboBox" />
+                
+                <!-- Search Button -->
+                <Button x:Name="searchButton" Style="{ StaticResource ButtonStyle }" Content="Seach Paintings" 
+                        Margin="100,0,0,0" Click="SearchButton_Click" />
+            </StackPanel>
+
+            <!-- Painting ListView -->
+            <ListView Margin="50" Name="paintingListView" SelectionChanged="PaintingListView_SelectionChanged">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{ StaticResource HiddenColumnStyle }">
+                        <GridViewColumn Width="220">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        
+                                        <!-- Painting Image -->
+                                        <Image Style="{ StaticResource ImageListViewStyle }">
+                                            <Image.Clip>
+                                                <EllipseGeometry RadiusX="80" RadiusY="80" Center="99,100"/>
+                                            </Image.Clip>
+                                        </Image>
+
+                                        <!-- Image Title -->
+                                        <TextBlock Style="{ StaticResource PaintingNameStyle }"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <!-- Painting Detail Panel -->
+            <StackPanel Margin="50,-40,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Selected Painting Image -->
+                    <Image x:Name="selectedImage" Style="{ StaticResource ImageSelectedPaintingStyle }"/>
+                    <StackPanel Grid.Column="1" Margin="0,50,0,0">
+                        <TextBlock x:Name="selectedPaint" FontSize="50" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        
+                        <!-- Artist Label-->
+                        <StackPanel Orientation="Horizontal" Margin="400,50,0,0">
+                            <TextBlock Style="{ StaticResource LabelStyle}" Text="Artist: "/>
+                            <TextBlock x:Name="selectedArtist" FontSize="18" Margin="65,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Museum Label-->
+                        <StackPanel Orientation="Horizontal" Margin="400,30,0,0">
+                            <TextBlock Style="{ StaticResource LabelStyle}" Text="Museum: "/>
+                            <TextBlock x:Name="selectedMuseum" FontSize="18" Margin="40,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Technique Label-->
+                        <StackPanel Orientation="Horizontal" Margin="400,30,0,0">
+                            <TextBlock Style="{ StaticResource LabelStyle}" Text="Technique: "/>
+                            <TextBlock x:Name="selectedTechnique" FontSize="18" Margin="27,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Year Label-->
+                        <StackPanel Orientation="Horizontal" Margin="400,30,0,0">
+                            <TextBlock Style="{ StaticResource LabelStyle}" Text="Year: "/>
+                            <TextBlock x:Name="selectedYear" FontSize="18" Margin="75,0,0,0"/>
+                        </StackPanel>
+
+                        <!-- Description Label-->
+                        <StackPanel Orientation="Horizontal" Margin="400,30,0,0">
+                            <TextBlock Style="{ StaticResource LabelStyle}" Text="Description: "/>
+                            <TextBlock x:Name="selectedDescription" FontSize="18" Margin="20,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>
